@@ -4,16 +4,14 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'sourcemap',
   entry: {
     app: ['./src/index.ts']
   },
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: 'dist',
-    filename: 'json-formatter.js',
+    filename: 'JSONFormatter.js',
     library: 'JSONFormatter',
-    libraryTarget: 'commonjs2',
     umdNamedDefine: true
   },
   resolve: {
