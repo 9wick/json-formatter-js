@@ -267,7 +267,18 @@ export default class JSONFormatter {
       if (this.json.length > this.config.hoverPreviewArrayCount) {
         return `Array[${this.json.length}]`;
       } else {
-        return `[${this.json.map(getPreview).join(', ')}]`;
+          const keys = this.keys;
+
+          // the first five keys (like Chrome Developer Tool)
+          const narrowKeys = keys.slice(0, this.config.hoverPreviewFieldCount);
+
+          // json value schematic information
+          const kvs = narrowKeys.map(key => `${key}:${getPreview(this.type, this.json[key])}`);
+
+          // if keys count greater then 5 then show ellipsis
+          const ellipsis = keys.length >= this.config.hoverPreviewFieldCount ? '…' : '';
+
+          return `[${kvs.join(', ')}${ellipsis}]`;
       }
     } else {
 
